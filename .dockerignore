@@ -1,0 +1,7 @@
+passphrase.txt
+.git
+*.md
+.cache
+venv/
+*.pyc
+**/__pycache__/

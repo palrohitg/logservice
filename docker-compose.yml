@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - TZ=Asia/Kolkata
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - my-network
+    restart: always
+  web:
+    build: .
+    environment:
+      - TZ=Asia/Kolkata
+    command : bash -c "sleep 10 && python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/logservice
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db 
+    networks:
+      - my-network
+    restart: on-failure
+  cron:
+    build: .
+    environment:
+      - TZ=Asia/Kolkata
+    command: bash -c "sleep 10 && while true; do python3 manage.py log_bulk_insert; sleep 2; done"
+    volumes:
+      - .:/logservice
+    networks:
+      - my-network
+    depends_on:
+      - web 
+
+networks:
+  my-network:
+    external: true

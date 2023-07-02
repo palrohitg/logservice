@@ -1,0 +1,6 @@
+venv/
+*.pyc
+*.data
+__pycache__
+data/
+migrations/
