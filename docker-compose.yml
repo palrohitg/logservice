@@ -30,7 +30,7 @@ services:
     build: .
     environment:
       - TZ=Asia/Kolkata
-    command: bash -c "sleep 10 && while true; do python3 manage.py log_bulk_insert; sleep 2; done"
+    command: bash -c "sleep 10 && while true; do python3 manage.py log_bulk_insert; sleep 30; done"
     volumes:
       - .:/logservice
     networks:
