@@ -23,12 +23,12 @@
 
 2. To Setup and Run Application + DataBase + CRON: 
 
-        chmod +m application_container_start.sh
+        chmod +x application_container_start.sh
         ./application_container_start.sh
 
 3. To Setup and Run Load Testing / Request: 
 
-        chmod +m test_container_start.sh
+        chmod +x test_container_start.sh
         ./test_container_start.sh
 
 
